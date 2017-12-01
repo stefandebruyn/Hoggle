@@ -1,6 +1,6 @@
 package hoggle;
 
-public final class Coordinate {
+public class Coordinate {
   private int x, y;
 
   public Coordinate(int x, int y) { this.x = x; this.y = y; }
@@ -13,7 +13,12 @@ public final class Coordinate {
 
   public void setY(int y) { this.y = y; }
 
-  public boolean equals(Coordinate other) { return (other.getX() == x && other.getY() == y); }
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof Coordinate && ((Coordinate)other).getX() == x && ((Coordinate)other).getY() == y)
+      return true;
+    return false;
+  }
 
   @Override
   public String toString() { return "(" + x + ", " + y + ")"; }

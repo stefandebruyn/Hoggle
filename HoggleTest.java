@@ -15,16 +15,17 @@ public class HoggleTest {
     // Solve each maze and print the solution. Press enter to begin solving the next maze
     for (String str : mazes) {
       Hoggle hoggle = createSolver(new File(str));
+      hoggle.setName(str.substring(str.indexOf("/")+1, str.indexOf(".")));
       ArrayList<Direction> solution = hoggle.solve();
 
-      System.out.print("Maze solved in " + solution.size() + " steps: " + solution + "\n\n" + (pos != mazes.length-1 ? "Press any key to solve next maze..." : "All mazes solved."));
+      System.out.print("\nMaze solved in " + solution.size() + " steps: " + solution + "\n\n" + (pos != mazes.length-1 ? "Press any key to solve next maze..." : "All mazes solved."));
 
       pos++;
       kb.nextLine();
     }
   }
 
-  // Create a maze from some file, parse for its start & end points, and construct a Hoggle from that data & return it
+  // Create a maze from some file, parse for its start & end points, construct a Hoggle from that data & return it
   private static Hoggle createSolver(File f) throws FileNotFoundException {
     Scanner reader = new Scanner(f);
     int cols = reader.nextInt()*2+1, rows = reader.nextInt()*2+1;
